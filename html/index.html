@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Coffee Shop - Brewed Perfection</title>
+    <link rel="stylesheet" href="../css/w3.css">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        /* Remove default margin and padding from html and body */
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%; /* Ensure body takes full height */
+            font-family: 'Open Sans', sans-serif;
+            box-sizing: border-box;
+            background-color: #f5f5f5;
+            color: #3e2723;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            background-image: url('../img/header.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            height: 100vh; /* Ensures it takes full height of the viewport */
+            width: 100%;
+            color: white;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+            animation: fadeIn 1s ease-in-out;
+            box-shadow: inset 0 0 0 500px rgba(0, 0, 0, 0.5);
+        }
+
+    .hero img {
+      font-size: 4em;
+      margin-bottom: 20px;
+      opacity: 0;
+      animation: slideDown 2.5s forwards;
+      animation-delay: 0.5s;
+      color: #e0e0e0;
+    }
+
+    .hero p {
+      font-size: 1.8em;
+      font-weight: 300;
+      margin-bottom: 500px;
+      margin-bottom: 30px;
+      opacity: 0;
+      animation: slideUp 2s forwards;
+      animation-delay: 1.5s;
+      color: #ffffff;
+      padding: 0px 20px;
+    }
+
+        /* Hero Animation */
+        @keyframes fadeIn {
+        0% { opacity: 0; }
+        100% { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+        0% { transform: translateY(500px); opacity: 0; }
+        100% { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes slideDown {
+        0% { transform: translateY(-500px); opacity: 0; }
+        100% { transform: translateY(0); opacity: 1; }
+        }
+
+        .btn-primary {
+            background-color: #3e2723;
+            color: white;
+            padding: 15px 30px;
+            font-size: 1.3em;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #5d4037;
+            transform: scale(1.1);
+        }
+
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 0px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            transition: background 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            background: #5d4037;
+        }
+
+        .navbar .w3-bar-item {
+            color: white;
+            padding: 16px 0px;
+            font-size: 1.2em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s ease;
+        }
+
+        .navbar .w3-bar-item:hover {
+            color: #ffeb3b;
+        }
+
+        /* Section Style */
+        section {
+            padding: 80px 20px;
+            margin-top: 0px;
+        }
+
+        section h2 {
+            font-size: 3em;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 50px;
+            color: #3e2723;
+            letter-spacing: 1px;
+        }
+
+        /* About Section */
+        #about p {
+            font-size: 1.3em;
+            line-height: 1.8;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            opacity: 0.8;
+        }
+
+        /* Gallery */
+        .w3-gallery img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 15px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .w3-row-padding {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .w3-col {
+            flex: 1 1 calc(33.333% - 20px);
+            max-width: calc(33.333% - 20px);
+            box-sizing: border-box;
+            padding: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .w3-col {
+                flex: 1 1 100%;
+                max-width: 100%;
+            }
+        }
+
+        /* Merchandise Slideshow */
+        .merch-slideshow {
+            max-width: 1000px;
+            margin: 0 auto;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .merch-slides {
+            display: flex;
+            transition: transform 1s ease-in-out;
+        }
+
+        .merch-slide {
+            min-width: 100%;
+            transition: opacity 0.5s ease;
+        }
+
+        .merch-slide img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        /* Contact Form */
+        .contact-form {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            font-size: 1em;
+            transition: border 0.3s ease;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            border: 1px solid #5d4037;
+        }
+
+        .contact-form button {
+            width: 100%;
+            padding: 15px;
+            background-color: #5d4037;
+            color: white;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .contact-form button:hover {
+            background-color: #5d4037;
+            transform: scale(1.05);
+        }
+
+        footer {
+            background-color: #5d4037;
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        footer p {
+            margin: 0;
+            opacity: 0.75;
+        }
+
+        /* Menu Portal */
+        .menu-portal {
+            position: relative;
+            background-image: url('../img/2coffees.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 100px 20px;
+            box-shadow: inset 0 0 0 500px rgba(0, 0, 0, 0.5);
+            border-radius: 15px;
+            margin: 50px auto;
+            width: 90%;
+            max-width: 1200px;
+        }
+
+        .menu-portal h2 {
+            font-size: 3em;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .menu-portal p {
+            font-size: 1.5em;
+            font-weight: 300;
+            margin-bottom: 40px;
+        }
+
+        .menu-portal .btn-primary {
+            font-size: 1.5em;
+            padding: 20px 40px;
+            background-color: #5d4037;
+            color: white;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .menu-portal .btn-primary:hover {
+            background-color: #3e2723;
+            transform: scale(1.1);
+        }
+
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            .menu-category {
+                width: 150px;
+                padding: 20px;
+            }
+        }
+
+        :root {
+      --rotation-duration: 1s; /* Time for a full rotation */
+      --pause-duration: 5s; /* Time for the pause */
+      --total-duration: calc(var(--rotation-duration) + var(--pause-duration)); /* Total cycle time */
+    }
+
+    /* Define custom properties for the rotation and pause timing */
+    :root {
+      --rotation-duration: 1s; /* Time for a full rotation */
+      --pause-duration: 5s; /* Time for the pause */
+      --total-duration: calc(var(--rotation-duration) + var(--pause-duration)); /* Total cycle time */
+      --image-size: 400px; /* Set the base image size */
+    }
+
+    /* Style for the image */
+    .rotating-image {
+      width: var(--image-size); /* Use custom property for width */
+      height: var(--image-size); /* Use custom property for height */
+      animation: rotate var(--total-duration) infinite; /* Use total-duration for the cycle */
+      transition: width 0.3s, height 0.3s; /* Smooth transition for resizing */
+    }
+
+    /* Define the rotation animation */
+    @keyframes rotate {
+      0% {
+        transform: rotate(0deg);
+      }
+      40% {
+        transform: rotate(0deg); /* Pause for the specified time */
+      }
+      100% {
+        transform: rotate(360deg); /* Complete a full rotation */
+      }
+    }
+
+    /* Make the image responsive using W3.CSS classes */
+    @media (max-width: 300px) {
+      :root {
+        --image-size: 300px; /* Adjust size for small screens */
+      }
+    }
+
+    @media (min-width: 300px) {
+      :root {
+        --image-size: 300px; /* Adjust size for larger screens */
+      }
+    }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <div class="w3-bar navbar" id="navbar">
+        <a href="#home" class="w3-bar-item w3-button w3-medium" style="width:25%">Home</a>
+        <a href="#merch" class="w3-bar-item w3-button w3-medium" style="width:25%">Merch</a>
+        <a href="#menu" class="w3-bar-item w3-button w3-medium" style="width:25%">Menu</a>
+        <a href="#contact" class="w3-bar-item w3-button w3-medium" style="width:25%">Contact</a>
+    </div>
+
+    <!-- Hero Section -->
+    <div class="hero" id="home">
+            <img src="../img/logo2-Photoroom (6).png" alt="Rotating Image" class="rotating-image">
+        <p class="w3-bar" style="text-shadow: 1px 1px 3px #000000; padding: 20px;"><b>A coffee house where customers become friends over a cup of coffee ☕️</b></p>
+    </div>
+
+    <!-- Menu Portal Section -->
+    <section id="menu" class="menu-portal">
+        <h2>Our Menu</h2>
+        <p>Explore our freshly brewed coffee, delicious pastries, and premium teas.</p>
+        <br>
+        <a href="#menu" class="btn-primary w3-medium">View Full Menu</a>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery">
+        <h2>Coffee Moments</h2>
+        <div class="w3-row-padding w3-gallery">
+            <div class="w3-col l4 m6 s12">
+                <img src="https://via.placeholder.com/400x300?text=Coffee+Art" alt="Coffee Art">
+            </div>
+            <div class="w3-col l4 m6 s12">
+                <img src="https://via.placeholder.com/400x300?text=Coffee+Beans" alt="Coffee Beans">
+            </div>
+            <div class="w3-col l4 m6 s12">
+                <img src="https://via.placeholder.com/400x300?text=Cozy+Cafe" alt="Cozy Cafe">
+            </div>
+        </div>
+    </section>
+
+    <!-- Merchandise Slideshow Section -->
+    <section id="merch">
+        <h2>Our Merch</h2>
+        <div class="merch-slideshow">
+            <div class="merch-slides">
+                <div class="merch-slide">
+                    <img src="../img/newspaper.jpg" alt="Coffee Mugs">
+                </div>
+                <div class="merch-slide">
+                    <img src="../img/pumpkins.jpg" alt="Coffee Shirts">
+                </div>
+                <div class="merch-slide">
+                    <img src="../img/inside.jpg" alt="Coffee Beans">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <!-- About Us Section -->
+    <section id="about">
+        <h2>About Us</h2>
+        <p>We are a family owned & operated coffee house! Swing by & meet us & let us get to know you! We will be sure to make a beverage that soothes your soul!</p>
+    </section>
+
+<section>
+    <div class="w3-center">     
+
+        <br><br>
+
+        <div class="w3-xxlarge">Hours<br><br></div>
+            <div>
+                <b>Monday</b> <br>
+                5:30 AM - 8:00 PM <br> 9:00 PM - 10:00 PM <br>
+                <b>Tuesday</b> <br>
+                5:30 AM - 8:00 PM <br>
+                <b>Wednesday</b> <br>
+                5:30 AM - 10:00 PM <br>
+                <b>Thursday</b> <br>
+                5:30 AM - 10:00 PM <br>
+                <b>Friday</b> <br>
+                5:30 AM - 10:00 PM <br>
+                <b>Saturday</b> <br>
+                6:00 AM - 10:00 PM <br>
+                <b>Sunday</b> <br>
+                6:00 AM - 8:00 PM
+            </div>
+            <br><br><br>
+            <div class="w3-xxlarge">Locations<br><br></div>
+                <div>
+                    <b>North End</b> <br>
+                    1507 N 13th St, Boise, ID 83702<br>
+                    <b>Avimor</b> <br>
+                    5963 W Avimor Dr, Boise, ID 83714<br>
+                </div>
+    </div>
+</section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="w3-center">
+        <p class="w3-xxlarge">Contact Us</p>
+    <p><a href="sms:+12083452046">(208) 345-2046</a></p>
+    <p><a href="mailto:hydeperkcoffee@gmail.com">hydeperkcoffee@gmail.com</a></p>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Hyde Perk Coffee House. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // Change navbar style when scrolled
+        window.onscroll = function () {
+            let navbar = document.getElementById("navbar");
+            if (window.scrollY > 0) {
+                navbar.classList.add("scrolled");
+            } else {
+                navbar.classList.remove("scrolled");
+            }
+        };
+
+        // Automatic Slideshow
+        let slideIndex = 0;
+
+        function showSlides() {
+            let slides = document.querySelectorAll('.merch-slide');
+            slideIndex++;
+            if (slideIndex >= slides.length) {
+                slideIndex = 0;
+            }
+
+            let slideWidth = slides[0].offsetWidth;
+            document.querySelector('.merch-slides').style.transform = `translateX(-${slideIndex * slideWidth}px)`;
+        }
+
+        // Start the slideshow every 3 seconds
+        setInterval(showSlides, 3000);
+    </script>
+
+</body>
+
+</html>
