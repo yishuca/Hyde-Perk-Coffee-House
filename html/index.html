@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Coffee Shop - Brewed Perfection</title>
+    <link rel="icon" href="" type="image/x-icon">
     <link rel="stylesheet" href="../css/w3.css">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
     <style>
@@ -18,6 +19,10 @@
             box-sizing: border-box;
             background-color: #f5f5f5;
             color: #3e2723;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         /* Hero Section */
@@ -44,7 +49,7 @@
       font-size: 4em;
       margin-bottom: 20px;
       opacity: 0;
-      animation: slideDown 2.5s forwards;
+      animation: slideDown .8s forwards;
       animation-delay: 0.5s;
       color: #e0e0e0;
     }
@@ -55,8 +60,8 @@
       margin-bottom: 500px;
       margin-bottom: 30px;
       opacity: 0;
-      animation: slideUp 2s forwards;
-      animation-delay: 1.5s;
+      animation: slideUp 1s forwards;
+      animation-delay: 1s;
       color: #ffffff;
       padding: 0px 20px;
     }
@@ -177,13 +182,14 @@
             }
         }
 
-        /* Merchandise Slideshow */
-        .merch-slideshow {
+/* Merchandise Slideshow */
+.merch-slideshow {
             max-width: 1000px;
             margin: 0 auto;
             overflow: hidden;
             position: relative;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
         }
 
         .merch-slides {
@@ -203,112 +209,45 @@
             border-radius: 10px;
         }
 
-        /* Contact Form */
-        .contact-form {
-            background-color: #fff;
-            padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
-            max-width: 700px;
-            margin: 0 auto;
-        }
+/* Overlay */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    z-index: 10;
+    box-shadow: inset 0 0 0 500px rgba(0, 0, 0, 0.5);
 
-        .contact-form input,
-        .contact-form textarea {
-            width: 100%;
-            padding: 15px;
-            margin-bottom: 20px;
-            border-radius: 5px;
-            border: 1px solid #ddd;
-            font-size: 1em;
-            transition: border 0.3s ease;
-        }
+}
 
-        .contact-form input:focus,
-        .contact-form textarea:focus {
-            border: 1px solid #5d4037;
-        }
+.overlay-text {
+    font-size: 2em;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
 
-        .contact-form button {
-            width: 100%;
-            padding: 15px;
-            background-color: #5d4037;
-            color: white;
-            font-size: 1.2em;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.3s ease;
-        }
+.btn-overlay {
+    background-color: #5d4037;
+    color: white;
+    padding: 15px 30px;
+    font-size: 1.5em;
+    text-decoration: none;
+    border-radius: 50px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
 
-        .contact-form button:hover {
-            background-color: #5d4037;
-            transform: scale(1.05);
-        }
-
-        footer {
-            background-color: #5d4037;
-            color: white;
-            text-align: center;
-            padding: 40px 20px;
-        }
-
-        footer p {
-            margin: 0;
-            opacity: 0.75;
-        }
-
-        /* Menu Portal */
-        .menu-portal {
-            position: relative;
-            background-image: url('../img/2coffees.jpg');
-            background-size: cover;
-            background-position: center;
-            color: white;
-            text-align: center;
-            padding: 100px 20px;
-            box-shadow: inset 0 0 0 500px rgba(0, 0, 0, 0.5);
-            border-radius: 15px;
-            margin: 50px auto;
-            width: 90%;
-            max-width: 1200px;
-        }
-
-        .menu-portal h2 {
-            font-size: 3em;
-            font-weight: 600;
-            margin-bottom: 20px;
-            color: white;
-        }
-
-        .menu-portal p {
-            font-size: 1.5em;
-            font-weight: 300;
-            margin-bottom: 40px;
-        }
-
-        .menu-portal .btn-primary {
-            font-size: 1.5em;
-            padding: 20px 40px;
-            background-color: #5d4037;
-            color: white;
-            border-radius: 50px;
-            text-decoration: none;
-            transition: background-color 0.3s ease, transform 0.3s ease;
-        }
-
-        .menu-portal .btn-primary:hover {
-            background-color: #3e2723;
-            transform: scale(1.1);
-        }
-
-        /* Mobile responsiveness */
-        @media (max-width: 768px) {
-            .menu-category {
-                width: 150px;
-                padding: 20px;
-            }
-        }
+.btn-overlay:hover {
+    background-color: #3e2723;
+    transform: scale(1.1);
+}
 
         :root {
       --rotation-duration: 1s; /* Time for a full rotation */
@@ -357,6 +296,18 @@
         --image-size: 300px; /* Adjust size for larger screens */
       }
     }
+
+    footer {
+            background-color: #5d4037;
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        footer p {
+            margin: 0;
+            opacity: 0.75;
+        }
     </style>
 </head>
 
@@ -365,8 +316,8 @@
     <!-- Navigation -->
     <div class="w3-bar navbar" id="navbar">
         <a href="#home" class="w3-bar-item w3-button w3-medium" style="width:25%">Home</a>
-        <a href="#merch" class="w3-bar-item w3-button w3-medium" style="width:25%">Merch</a>
         <a href="#menu" class="w3-bar-item w3-button w3-medium" style="width:25%">Menu</a>
+        <a href="#hours" class="w3-bar-item w3-button w3-medium" style="width:25%">Hours</a>
         <a href="#contact" class="w3-bar-item w3-button w3-medium" style="width:25%">Contact</a>
     </div>
 
@@ -376,62 +327,84 @@
         <p class="w3-bar" style="text-shadow: 1px 1px 3px #000000; padding: 20px;"><b>A coffee house where customers become friends over a cup of coffee ☕️</b></p>
     </div>
 
-    <!-- Menu Portal Section -->
-    <section id="menu" class="menu-portal">
-        <h2>Our Menu</h2>
-        <p>Explore our freshly brewed coffee, delicious pastries, and premium teas.</p>
-        <br>
-        <a href="#menu" class="btn-primary w3-medium">View Full Menu</a>
-    </section>
+
+<!-- Menu Slideshow Section -->
+<section id="menu">
+    <div class="merch-slideshow">
+        <!-- Overlay -->
+        <div class="overlay">
+            <p class="w3-xlarge" style="padding: 10px;">Explore our freshly brewed coffee, delicious pastries, and premium teas.</p>
+            <br>
+            <a href="#shop" class="btn-overlay">See our menu</a>
+        </div>
+        <div class="merch-slides">
+            <div class="merch-slide">
+                <img src="../img/newspaper.jpg" alt="Coffee Mugs">
+            </div>
+            <div class="merch-slide">
+                <img src="../img/pumpkins.jpg" alt="Coffee Shirts">
+            </div>
+            <div class="merch-slide">
+                <img src="../img/inside.jpg" alt="Coffee Beans">
+            </div>
+        </div>
+    </div>
+</section>
 
     <!-- Gallery Section -->
     <section id="gallery">
-        <h2>Coffee Moments</h2>
         <div class="w3-row-padding w3-gallery">
             <div class="w3-col l4 m6 s12">
-                <img src="https://via.placeholder.com/400x300?text=Coffee+Art" alt="Coffee Art">
+                <img src="../img/drinkoutside.jpg" alt="Coffee Art">
             </div>
             <div class="w3-col l4 m6 s12">
-                <img src="https://via.placeholder.com/400x300?text=Coffee+Beans" alt="Coffee Beans">
+                <img src="../img/painting.jpg" alt="Coffee Beans">
             </div>
             <div class="w3-col l4 m6 s12">
-                <img src="https://via.placeholder.com/400x300?text=Cozy+Cafe" alt="Cozy Cafe">
+                <img src="../img/464330702_3432776466867042_3436279284566667379_n.jpg" alt="Cozy Cafe">
             </div>
         </div>
     </section>
 
-    <!-- Merchandise Slideshow Section -->
-    <section id="merch">
-        <h2>Our Merch</h2>
-        <div class="merch-slideshow">
-            <div class="merch-slides">
-                <div class="merch-slide">
-                    <img src="../img/newspaper.jpg" alt="Coffee Mugs">
-                </div>
-                <div class="merch-slide">
-                    <img src="../img/pumpkins.jpg" alt="Coffee Shirts">
-                </div>
-                <div class="merch-slide">
-                    <img src="../img/inside.jpg" alt="Coffee Beans">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    
     <!-- About Us Section -->
     <section id="about">
-        <h2>About Us</h2>
+        <p class="w3-xxlarge">About Us</p>
+        <br>
+            <div class="w3-row-padding w3-gallery">
+                <div class="w3-col l4 m6 s12">
+                    <img src="../img/team.jpg" alt="Cozy Cafe">
+                </div>
+            </div>
+        <br>
         <p>We are a family owned & operated coffee house! Swing by & meet us & let us get to know you! We will be sure to make a beverage that soothes your soul!</p>
     </section>
 
-<section>
-    <div class="w3-center">     
+    <!-- Contact Section -->
+    <section id="contact" class="w3-center">
+        <p class="w3-xxlarge">Find Us On Social Media!</p>
+        <a href="https://www.instagram.com/hydeperkcoffee/?hl=en" target="_blank">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width: 10%;">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 18C15.3137 18 18 15.3137 18 12C18 8.68629 15.3137 6 12 6C8.68629 6 6 8.68629 6 12C6 15.3137 8.68629 18 12 18ZM12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16Z" fill="#0F0F0F"/>
+            <path d="M18 5C17.4477 5 17 5.44772 17 6C17 6.55228 17.4477 7 18 7C18.5523 7 19 6.55228 19 6C19 5.44772 18.5523 5 18 5Z" fill="#0F0F0F"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M1.65396 4.27606C1 5.55953 1 7.23969 1 10.6V13.4C1 16.7603 1 18.4405 1.65396 19.7239C2.2292 20.8529 3.14708 21.7708 4.27606 22.346C5.55953 23 7.23969 23 10.6 23H13.4C16.7603 23 18.4405 23 19.7239 22.346C20.8529 21.7708 21.7708 20.8529 22.346 19.7239C23 18.4405 23 16.7603 23 13.4V10.6C23 7.23969 23 5.55953 22.346 4.27606C21.7708 3.14708 20.8529 2.2292 19.7239 1.65396C18.4405 1 16.7603 1 13.4 1H10.6C7.23969 1 5.55953 1 4.27606 1.65396C3.14708 2.2292 2.2292 3.14708 1.65396 4.27606ZM13.4 3H10.6C8.88684 3 7.72225 3.00156 6.82208 3.0751C5.94524 3.14674 5.49684 3.27659 5.18404 3.43597C4.43139 3.81947 3.81947 4.43139 3.43597 5.18404C3.27659 5.49684 3.14674 5.94524 3.0751 6.82208C3.00156 7.72225 3 8.88684 3 10.6V13.4C3 15.1132 3.00156 16.2777 3.0751 17.1779C3.14674 18.0548 3.27659 18.5032 3.43597 18.816C3.81947 19.5686 4.43139 20.1805 5.18404 20.564C5.49684 20.7234 5.94524 20.8533 6.82208 20.9249C7.72225 20.9984 8.88684 21 10.6 21H13.4C15.1132 21 16.2777 20.9984 17.1779 20.9249C18.0548 20.8533 18.5032 20.7234 18.816 20.564C19.5686 20.1805 20.1805 19.5686 20.564 18.816C20.7234 18.5032 20.8533 18.0548 20.9249 17.1779C20.9984 16.2777 21 15.1132 21 13.4V10.6C21 8.88684 20.9984 7.72225 20.9249 6.82208C20.8533 5.94524 20.7234 5.49684 20.564 5.18404C20.1805 4.43139 19.5686 3.81947 18.816 3.43597C18.5032 3.27659 18.0548 3.14674 17.1779 3.0751C16.2777 3.00156 15.1132 3 13.4 3Z" fill="#0F0F0F"/>
+            </svg>
+        </a>
+        <a href="https://www.facebook.com/hydeperkcoffee/" target="_blank">
+        <svg viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" style="width: 10%;">
+            <path d="M30.996 16.091c-0.001-8.281-6.714-14.994-14.996-14.994s-14.996 6.714-14.996 14.996c0 7.455 5.44 13.639 12.566 14.8l0.086 0.012v-10.478h-3.808v-4.336h3.808v-3.302c-0.019-0.167-0.029-0.361-0.029-0.557 0-2.923 2.37-5.293 5.293-5.293 0.141 0 0.281 0.006 0.42 0.016l-0.018-0.001c1.199 0.017 2.359 0.123 3.491 0.312l-0.134-0.019v3.69h-1.892c-0.086-0.012-0.185-0.019-0.285-0.019-1.197 0-2.168 0.97-2.168 2.168 0 0.068 0.003 0.135 0.009 0.202l-0.001-0.009v2.812h4.159l-0.665 4.336h-3.494v10.478c7.213-1.174 12.653-7.359 12.654-14.814v-0z"></path>
+            </svg>
+        </a>
+        <p><a href="sms:+12083452046">(208) 345-2046</a></p>
+        <p><a href="mailto:hydeperkcoffee@gmail.com">hydeperkcoffee@gmail.com</a></p>
+</section>   
 
+<section id="hours">
+    <div class="w3-center">
         <br><br>
-
-        <div class="w3-xxlarge">Hours<br><br></div>
+        <div class="w3-xxlarge">Hours & Locations<br></div><br>
             <div>
+                <b class="w3-xlarge">North End</b> <br>
+                1507 N 13th St, Boise, ID 83702<br><br>
                 <b>Monday</b> <br>
                 5:30 AM - 8:00 PM <br> 9:00 PM - 10:00 PM <br>
                 <b>Tuesday</b> <br>
@@ -447,27 +420,32 @@
                 <b>Sunday</b> <br>
                 6:00 AM - 8:00 PM
             </div>
-            <br><br><br>
-            <div class="w3-xxlarge">Locations<br><br></div>
-                <div>
-                    <b>North End</b> <br>
-                    1507 N 13th St, Boise, ID 83702<br>
-                    <b>Avimor</b> <br>
-                    5963 W Avimor Dr, Boise, ID 83714<br>
-                </div>
+            <br><br>
+            <div>
+                <b class="w3-xlarge">Avimor</b> <br>
+                5963 W Avimor Dr, Boise, ID 83714<br><br>
+                <b>Monday</b> <br>	
+                6 AM–4 PM<br>
+                <b>Tuesday</b> <br>
+                6 AM–4 PM<br>
+                <b>Wednesday</b> <br>
+                6 AM–6 PM<br>
+                <b>Thursday</b> <br>
+                6 AM–6 PM<br>
+                <b>Friday</b> <br>
+                6 AM–6 PM<br>
+                <b>Saturday</b> <br>
+                7 AM–6 PM<br>
+                <b>Sunday</b> <br>
+                7 AM-4 PM
+            </div>
     </div>
 </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="w3-center">
-        <p class="w3-xxlarge">Contact Us</p>
-    <p><a href="sms:+12083452046">(208) 345-2046</a></p>
-    <p><a href="mailto:hydeperkcoffee@gmail.com">hydeperkcoffee@gmail.com</a></p>
-    </section>
 
     <!-- Footer -->
     <footer>
         <p>&copy; 2024 Hyde Perk Coffee House. All Rights Reserved.</p>
+        <p>&copy; Website made local ♥</p>
     </footer>
 
     <script>
@@ -497,6 +475,12 @@
 
         // Start the slideshow every 3 seconds
         setInterval(showSlides, 3000);
+
+        // JavaScript for Scroll Animation
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
     </script>
 
 </body>
