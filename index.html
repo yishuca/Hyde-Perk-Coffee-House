@@ -10,7 +10,8 @@
             font-family: Arial, sans-serif;
             background-color: #121212;
             color: white;
-            overflow: hidden;
+            overflow-y: auto; /* Allow vertical scrolling */
+            max-height: 100vh; /* Prevent body from expanding beyond the viewport height */
         }
         .controls {
             display: flex;
@@ -74,6 +75,9 @@
         .bulb.on .glow {
             fill: rgba(255, 255, 0, 0.6);
         }
+        .switch-container svg {
+            transform: rotate(180deg); /* Rotate the switch upside down */
+        }
     </style>
 </head>
 <body>
@@ -85,6 +89,7 @@
         <label for="numSwitches">Number of switches: <span id="sliderValue">100</span></label>
         <input type="range" id="numSwitches" min="1" max="100" value="100">
         <button class="button" id="increase">+</button>
+        <button class="button" id="reset">Reset</button> <!-- Reset button -->
     </div>
 
     <div class="grid-container" id="switches"></div>
@@ -97,6 +102,7 @@
         const sliderValue = document.getElementById('sliderValue');
         const decreaseBtn = document.getElementById('decrease');
         const increaseBtn = document.getElementById('increase');
+        const resetBtn = document.getElementById('reset'); // Reset button reference
 
         function shuffleArray(array) {
             for (let i = array.length - 1; i > 0; i--) {
@@ -192,6 +198,15 @@
                 sliderValue.textContent = slider.value;
                 createSwitchesAndBulbs(parseInt(slider.value));
             }
+        });
+
+        // Reset button functionality
+        resetBtn.addEventListener("click", function () {
+            // Reset all switches and bulbs to off state
+            const allSwitches = document.querySelectorAll('.switch');
+            const allBulbs = document.querySelectorAll('.bulb');
+            allSwitches.forEach(switchSvg => switchSvg.classList.remove('on'));
+            allBulbs.forEach(bulbSvg => bulbSvg.classList.remove('on'));
         });
 
     </script>
