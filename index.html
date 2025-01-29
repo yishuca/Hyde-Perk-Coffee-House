@@ -1,496 +1,200 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Hyde Perk Cofee House</title>
-    <link rel="icon" href="../img/coffee-svgrepo-com.png" type="image/x-icon">
-    <link rel="stylesheet" href="../css/w3.css">
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <title>Adjustable Light Switches</title>
     <style>
-        /* Remove default margin and padding from html and body */
-        html, body {
-            margin: 0;
-            padding: 0;
-            height: 100%; /* Ensure body takes full height */
-            font-family: 'Open Sans', sans-serif;
-            box-sizing: border-box;
-            background-color: #f5f5f5;
-            color: #3e2723;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        /* Hero Section */
-        .hero {
-            position: relative;
-            background-image: url('../img/header.jpg');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            height: 100vh; /* Ensures it takes full height of the viewport */
-            width: 100%;
-            color: white;
+        body {
             text-align: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 0;
-            animation: fadeIn 1s ease-in-out;
-            box-shadow: inset 0 0 0 500px rgba(0, 0, 0, 0.5);
-        }
-
-    .hero img {
-      font-size: 4em;
-      margin-bottom: 20px;
-      opacity: 0;
-      animation: slideDown .8s forwards;
-      animation-delay: 0.5s;
-      color: #e0e0e0;
-    }
-
-    .hero p {
-      font-size: 1.8em;
-      font-weight: 300;
-      margin-bottom: 500px;
-      margin-bottom: 30px;
-      opacity: 0;
-      animation: slideUp 1s forwards;
-      animation-delay: 1s;
-      color: #ffffff;
-      padding: 0px 20px;
-    }
-
-        /* Hero Animation */
-        @keyframes fadeIn {
-        0% { opacity: 0; }
-        100% { opacity: 1; }
-        }
-
-        @keyframes slideUp {
-        0% { transform: translateY(500px); opacity: 0; }
-        100% { transform: translateY(0); opacity: 1; }
-        }
-
-        @keyframes slideDown {
-        0% { transform: translateY(-500px); opacity: 0; }
-        100% { transform: translateY(0); opacity: 1; }
-        }
-
-        .btn-primary {
-            background-color: #3e2723;
+            font-family: Arial, sans-serif;
+            background-color: #121212;
             color: white;
-            padding: 15px 30px;
-            font-size: 1.3em;
-            text-decoration: none;
-            border-radius: 50px;
-            transition: background-color 0.3s ease, transform 0.3s ease;
-        }
-
-        .btn-primary:hover {
-            background-color: #5d4037;
-            transform: scale(1.1);
-        }
-
-        /* Navbar */
-        .navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-            padding: 0px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-            transition: background 0.3s ease;
-        }
-
-        .navbar.scrolled {
-            background: #5d4037;
-        }
-
-        .navbar .w3-bar-item {
-            color: white;
-            padding: 16px 0px;
-            font-size: 1.2em;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: color 0.3s ease;
-        }
-
-        .navbar .w3-bar-item:hover {
-            color: #ffeb3b;
-        }
-
-        /* Section Style */
-        section {
-            padding: 80px 20px;
-            margin-top: 0px;
-        }
-
-        section h2 {
-            font-size: 3em;
-            font-weight: 600;
-            text-align: center;
-            margin-bottom: 50px;
-            color: #3e2723;
-            letter-spacing: 1px;
-        }
-
-        /* About Section */
-        #about p {
-            font-size: 1.3em;
-            line-height: 1.8;
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
-            opacity: 0.8;
-        }
-
-        /* Gallery */
-        .w3-gallery img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 15px;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .w3-row-padding {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            justify-content: center;
-        }
-
-        .w3-col {
-            flex: 1 1 calc(33.333% - 20px);
-            max-width: calc(33.333% - 20px);
-            box-sizing: border-box;
-            padding: 10px;
-        }
-
-        @media (max-width: 768px) {
-            .w3-col {
-                flex: 1 1 100%;
-                max-width: 100%;
-            }
-        }
-
-/* Merchandise Slideshow */
-.merch-slideshow {
-            max-width: 1000px;
-            margin: 0 auto;
             overflow: hidden;
-            position: relative;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            border-radius: 15px;
         }
-
-        .merch-slides {
+        .controls {
             display: flex;
-            transition: transform 1s ease-in-out;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 10px;
         }
-
-        .merch-slide {
-            min-width: 100%;
-            transition: opacity 0.5s ease;
-        }
-
-        .merch-slide img {
-            width: 100%;
-            height: 400px;
-            object-fit: cover;
-            border-radius: 10px;
-        }
-
-/* Overlay */
-.overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    color: white;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    z-index: 10;
-    box-shadow: inset 0 0 0 500px rgba(0, 0, 0, 0.5);
-
-}
-
-.overlay-text {
-    font-size: 2em;
-    font-weight: bold;
-    margin-bottom: 20px;
-    text-transform: uppercase;
-}
-
-.btn-overlay {
-    background-color: #5d4037;
-    color: white;
-    padding: 15px 30px;
-    font-size: 1.5em;
-    text-decoration: none;
-    border-radius: 50px;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-}
-
-.btn-overlay:hover {
-    background-color: #3e2723;
-    transform: scale(1.1);
-}
-
-        :root {
-      --rotation-duration: 1s; /* Time for a full rotation */
-      --pause-duration: 5s; /* Time for the pause */
-      --total-duration: calc(var(--rotation-duration) + var(--pause-duration)); /* Total cycle time */
-    }
-
-    /* Define custom properties for the rotation and pause timing */
-    :root {
-      --rotation-duration: 1s; /* Time for a full rotation */
-      --pause-duration: 5s; /* Time for the pause */
-      --total-duration: calc(var(--rotation-duration) + var(--pause-duration)); /* Total cycle time */
-      --image-size: 400px; /* Set the base image size */
-    }
-
-    /* Style for the image */
-    .rotating-image {
-      width: var(--image-size); /* Use custom property for width */
-      height: var(--image-size); /* Use custom property for height */
-      animation: rotate var(--total-duration) infinite; /* Use total-duration for the cycle */
-      transition: width 0.3s, height 0.3s; /* Smooth transition for resizing */
-    }
-
-    /* Define the rotation animation */
-    @keyframes rotate {
-      0% {
-        transform: rotate(0deg);
-      }
-      40% {
-        transform: rotate(0deg); /* Pause for the specified time */
-      }
-      100% {
-        transform: rotate(360deg); /* Complete a full rotation */
-      }
-    }
-
-    /* Make the image responsive using W3.CSS classes */
-    @media (max-width: 300px) {
-      :root {
-        --image-size: 300px; /* Adjust size for small screens */
-      }
-    }
-
-    @media (min-width: 300px) {
-      :root {
-        --image-size: 300px; /* Adjust size for larger screens */
-      }
-    }
-
-    footer {
-            background-color: #5d4037;
+        .button {
+            padding: 5px 10px;
+            font-size: 16px;
+            cursor: pointer;
+            background: #333;
             color: white;
-            text-align: center;
-            padding: 40px 20px;
+            border: none;
+            border-radius: 5px;
+            transition: 0.2s;
         }
-
-        footer p {
-            margin: 0;
-            opacity: 0.75;
+        .button:hover {
+            background: #555;
+        }
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(25px, 1fr));
+            gap: 5px;
+            justify-content: center;
+            padding: 10px;
+            max-width: 100vw;
+        }
+        .switch-container, .bulb-container {
+            text-align: center;
+            font-size: 12px;
+        }
+        .switch, .bulb {
+            width: 100%;
+            max-width: 30px;
+            cursor: pointer;
+        }
+        .switch .base {
+            fill: #333;
+            stroke: #666;
+            stroke-width: 1;
+        }
+        .switch .toggle {
+            fill: #bbb;
+            transition: transform 0.2s, fill 0.2s;
+        }
+        .switch.on .toggle {
+            fill: #0f0;
+            transform: translateY(5px);
+        }
+        .bulb .outline {
+            fill: #444;
+            stroke: #666;
+            stroke-width: 1;
+        }
+        .bulb .glow {
+            fill: transparent;
+            transition: fill 0.2s;
+        }
+        .bulb.on .glow {
+            fill: rgba(255, 255, 0, 0.6);
         }
     </style>
 </head>
-
 <body>
 
-    <!-- Navigation -->
-    <div class="w3-bar navbar" id="navbar">
-        <a href="#home" class="w3-bar-item w3-button w3-medium" style="width:25%">Home</a>
-        <a href="#menu" class="w3-bar-item w3-button w3-medium" style="width:25%">Menu</a>
-        <a href="#hours" class="w3-bar-item w3-button w3-medium" style="width:25%">Hours</a>
-        <a href="#contact" class="w3-bar-item w3-button w3-medium" style="width:25%">Contact</a>
+    <h1>Adjustable Light Switches & Bulbs</h1>
+
+    <div class="controls">
+        <button class="button" id="decrease">−</button>
+        <label for="numSwitches">Number of switches: <span id="sliderValue">100</span></label>
+        <input type="range" id="numSwitches" min="1" max="100" value="100">
+        <button class="button" id="increase">+</button>
     </div>
 
-    <!-- Hero Section -->
-    <div class="hero" id="home">
-            <img src="../img/logo2-Photoroom (6).png" alt="Rotating Image" class="rotating-image">
-        <p class="w3-bar" style="text-shadow: 1px 1px 3px #000000; padding: 20px;"><b>A coffee house where customers become friends over a cup of coffee ☕️</b></p>
-    </div>
-
-
-<!-- Menu Slideshow Section -->
-<section id="menu">
-    <div class="merch-slideshow">
-        <!-- Overlay -->
-        <div class="overlay">
-            <p class="w3-xlarge" style="padding: 10px;">Explore our freshly brewed coffee, delicious pastries, and premium teas.</p>
-            <br>
-            <a href="#shop" class="btn-overlay">See our menu</a>
-        </div>
-        <div class="merch-slides">
-            <div class="merch-slide">
-                <img src="../img/2coffees.jpg" alt="Coffee Mugs">
-            </div>
-            <div class="merch-slide">
-                <img src="../img/pumpkins.jpg" alt="Coffee Shirts">
-            </div>
-            <div class="merch-slide">
-                <img src="../img/newspaper.jpg" alt="Coffee Beans">
-            </div>
-        </div>
-    </div>
-</section>
-
-    <!-- Gallery Section -->
-    <section id="gallery">
-        <div class="w3-row-padding w3-gallery">
-            <div class="w3-col l4 m6 s12">
-                <img src="../img/drinkoutside.jpg" alt="Coffee Art">
-            </div>
-            <div class="w3-col l4 m6 s12">
-                <img src="../img/painting.jpg" alt="Coffee Beans">
-            </div>
-            <div class="w3-col l4 m6 s12">
-                <img src="../img/464330702_3432776466867042_3436279284566667379_n.jpg" alt="Cozy Cafe">
-            </div>
-        </div>
-    </section>
-
-    <!-- About Us Section -->
-    <section id="about">
-        <p class="w3-xxlarge">About Us</p>
-        <br>
-            <div class="w3-row-padding w3-gallery">
-                <div class="w3-col l4 m6 s12">
-                    <img src="../img/team.jpg" alt="Cozy Cafe">
-                </div>
-            </div>
-        <br>
-        <p>We are a family owned & operated coffee house! Swing by & meet us & let us get to know you! We will be sure to make a beverage that soothes your soul!</p>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="w3-center">
-        <p class="w3-xxlarge">Find Us On Social Media!</p>
-        <a href="https://www.instagram.com/hydeperkcoffee/?hl=en" target="_blank">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width: 10%;">
-            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 18C15.3137 18 18 15.3137 18 12C18 8.68629 15.3137 6 12 6C8.68629 6 6 8.68629 6 12C6 15.3137 8.68629 18 12 18ZM12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16Z" fill="#0F0F0F"/>
-            <path d="M18 5C17.4477 5 17 5.44772 17 6C17 6.55228 17.4477 7 18 7C18.5523 7 19 6.55228 19 6C19 5.44772 18.5523 5 18 5Z" fill="#0F0F0F"/>
-            <path fill-rule="evenodd" clip-rule="evenodd" d="M1.65396 4.27606C1 5.55953 1 7.23969 1 10.6V13.4C1 16.7603 1 18.4405 1.65396 19.7239C2.2292 20.8529 3.14708 21.7708 4.27606 22.346C5.55953 23 7.23969 23 10.6 23H13.4C16.7603 23 18.4405 23 19.7239 22.346C20.8529 21.7708 21.7708 20.8529 22.346 19.7239C23 18.4405 23 16.7603 23 13.4V10.6C23 7.23969 23 5.55953 22.346 4.27606C21.7708 3.14708 20.8529 2.2292 19.7239 1.65396C18.4405 1 16.7603 1 13.4 1H10.6C7.23969 1 5.55953 1 4.27606 1.65396C3.14708 2.2292 2.2292 3.14708 1.65396 4.27606ZM13.4 3H10.6C8.88684 3 7.72225 3.00156 6.82208 3.0751C5.94524 3.14674 5.49684 3.27659 5.18404 3.43597C4.43139 3.81947 3.81947 4.43139 3.43597 5.18404C3.27659 5.49684 3.14674 5.94524 3.0751 6.82208C3.00156 7.72225 3 8.88684 3 10.6V13.4C3 15.1132 3.00156 16.2777 3.0751 17.1779C3.14674 18.0548 3.27659 18.5032 3.43597 18.816C3.81947 19.5686 4.43139 20.1805 5.18404 20.564C5.49684 20.7234 5.94524 20.8533 6.82208 20.9249C7.72225 20.9984 8.88684 21 10.6 21H13.4C15.1132 21 16.2777 20.9984 17.1779 20.9249C18.0548 20.8533 18.5032 20.7234 18.816 20.564C19.5686 20.1805 20.1805 19.5686 20.564 18.816C20.7234 18.5032 20.8533 18.0548 20.9249 17.1779C20.9984 16.2777 21 15.1132 21 13.4V10.6C21 8.88684 20.9984 7.72225 20.9249 6.82208C20.8533 5.94524 20.7234 5.49684 20.564 5.18404C20.1805 4.43139 19.5686 3.81947 18.816 3.43597C18.5032 3.27659 18.0548 3.14674 17.1779 3.0751C16.2777 3.00156 15.1132 3 13.4 3Z" fill="#0F0F0F"/>
-            </svg>
-        </a>
-        <a href="https://www.facebook.com/hydeperkcoffee/" target="_blank">
-        <svg viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" style="width: 10%;">
-            <path d="M30.996 16.091c-0.001-8.281-6.714-14.994-14.996-14.994s-14.996 6.714-14.996 14.996c0 7.455 5.44 13.639 12.566 14.8l0.086 0.012v-10.478h-3.808v-4.336h3.808v-3.302c-0.019-0.167-0.029-0.361-0.029-0.557 0-2.923 2.37-5.293 5.293-5.293 0.141 0 0.281 0.006 0.42 0.016l-0.018-0.001c1.199 0.017 2.359 0.123 3.491 0.312l-0.134-0.019v3.69h-1.892c-0.086-0.012-0.185-0.019-0.285-0.019-1.197 0-2.168 0.97-2.168 2.168 0 0.068 0.003 0.135 0.009 0.202l-0.001-0.009v2.812h4.159l-0.665 4.336h-3.494v10.478c7.213-1.174 12.653-7.359 12.654-14.814v-0z"></path>
-            </svg>
-        </a>
-        <a href="https://twitter.com/hydeperkcoffee?lang=en" target="_blank">
-            <svg viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" style="width: 10%;">
-                <path d="M 4.0175781 4 L 13.091797 17.609375 L 4.3359375 28 L 6.9511719 28 L 14.246094 19.34375 L 20.017578 28 L 20.552734 28 L 28.015625 28 L 18.712891 14.042969 L 27.175781 4 L 24.560547 4 L 17.558594 12.310547 L 12.017578 4 L 4.0175781 4 z M 7.7558594 6 L 10.947266 6 L 24.279297 26 L 21.087891 26 L 7.7558594 6 z"></path>
-                </svg>
-            </a>
-        <p><a href="sms:+12083452046">(208) 345-2046</a></p>
-        <p><a href="mailto:hydeperkcoffee@gmail.com">hydeperkcoffee@gmail.com</a></p>
-</section>   
-
-<section id="hours">
-    <div class="w3-center">
-        <br><br>
-        <div class="w3-xxlarge">Hours & Locations<br></div><br>
-            <div>
-                <b class="w3-xlarge">North End</b> <br>
-                1507 N 13th St, Boise, ID 83702<br><br>
-                <b>Monday</b> <br>
-                5:30 AM - 8:00 PM <br> 9:00 PM - 10:00 PM <br>
-                <b>Tuesday</b> <br>
-                5:30 AM - 8:00 PM <br>
-                <b>Wednesday</b> <br>
-                5:30 AM - 10:00 PM <br>
-                <b>Thursday</b> <br>
-                5:30 AM - 10:00 PM <br>
-                <b>Friday</b> <br>
-                5:30 AM - 10:00 PM <br>
-                <b>Saturday</b> <br>
-                6:00 AM - 10:00 PM <br>
-                <b>Sunday</b> <br>
-                6:00 AM - 8:00 PM
-            </div>
-            <br><br>
-            <div>
-                <b class="w3-xlarge">Avimor</b> <br>
-                5963 W Avimor Dr, Boise, ID 83714<br><br>
-                <b>Monday</b> <br>	
-                6 AM–4 PM<br>
-                <b>Tuesday</b> <br>
-                6 AM–4 PM<br>
-                <b>Wednesday</b> <br>
-                6 AM–6 PM<br>
-                <b>Thursday</b> <br>
-                6 AM–6 PM<br>
-                <b>Friday</b> <br>
-                6 AM–6 PM<br>
-                <b>Saturday</b> <br>
-                7 AM–6 PM<br>
-                <b>Sunday</b> <br>
-                7 AM-4 PM
-            </div>
-    </div>
-</section>
-
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2024 Hyde Perk Coffee House. All Rights Reserved.</p>
-        <p>Website made local ♥ by
-            <a href="https://www.google.com/search?q=Yishuca+Designs&stick=H4sIAAAAAAAA_-NgU1IxqDAzMU82NEk2MkqzNfirestoreIsrQyqEhLS7OwTDNPMrAwMjY1NEpexMofmVmcUZqcqOCSWpyZnlcMAI7WkV06AAAA&hl=en&mat=CcyCjVrczKUyElcBqiIDwuEnSkjtWn-T1yuTLkOZ0M76OHjKJvnvWiayBsnERJkKIrH5uH2yn5t0WsQl3sSypx1eetzXV58m4pBoi56C9U0JjRhXH8Z2uWJ_TesmeIFxW6A&authuser=1" class="pointer w3-hover-text-white w3-text-white" style="color: rgba(115, 115, 115, 0.8)">Yishuca Designs
-            </a>
-        </p>
-    </footer>
+    <div class="grid-container" id="switches"></div>
+    <div class="grid-container" id="bulbs"></div>
 
     <script>
-        // Change navbar style when scrolled
-        window.onscroll = function () {
-            let navbar = document.getElementById("navbar");
-            if (window.scrollY > 0) {
-                navbar.classList.add("scrolled");
-            } else {
-                navbar.classList.remove("scrolled");
+        const switchContainer = document.getElementById('switches');
+        const bulbContainer = document.getElementById('bulbs');
+        const slider = document.getElementById('numSwitches');
+        const sliderValue = document.getElementById('sliderValue');
+        const decreaseBtn = document.getElementById('decrease');
+        const increaseBtn = document.getElementById('increase');
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
             }
-        };
-
-        // Automatic Slideshow
-        let slideIndex = 0;
-
-        function showSlides() {
-            let slides = document.querySelectorAll('.merch-slide');
-            slideIndex++;
-            if (slideIndex >= slides.length) {
-                slideIndex = 0;
-            }
-
-            let slideWidth = slides[0].offsetWidth;
-            document.querySelector('.merch-slides').style.transform = `translateX(-${slideIndex * slideWidth}px)`;
         }
 
-        // Start the slideshow every 3 seconds
-        setInterval(showSlides, 3000);
+        function createSwitchesAndBulbs(count) {
+            switchContainer.innerHTML = "";
+            bulbContainer.innerHTML = "";
 
-        // JavaScript for Scroll Animation
-        function scrollToTop() {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            let bulbNumbers = Array.from({ length: count }, (_, i) => i + 1);
+            shuffleArray(bulbNumbers);
+
+            for (let i = 0; i < count; i++) {
+                const switchNumber = i + 1;
+                const bulbNumber = bulbNumbers[i];
+
+                // Create switch
+                const switchDiv = document.createElement("div");
+                switchDiv.classList.add("switch-container");
+
+                const switchSvg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+                switchSvg.setAttribute("viewBox", "0 0 30 50");
+                switchSvg.classList.add("switch");
+                switchSvg.setAttribute("data-label", switchNumber);
+                switchSvg.innerHTML = `
+                    <rect class="base" x="5" y="5" width="20" height="40" rx="5"/>
+                    <circle class="toggle" cx="15" cy="20" r="7"/>
+                `;
+
+                const switchLabel = document.createElement("div");
+                switchLabel.textContent = switchNumber;
+
+                switchDiv.appendChild(switchSvg);
+                switchDiv.appendChild(switchLabel);
+
+                // Create bulb
+                const bulbDiv = document.createElement("div");
+                bulbDiv.classList.add("bulb-container");
+
+                const bulbSvg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+                bulbSvg.setAttribute("viewBox", "0 0 30 30");
+                bulbSvg.classList.add("bulb");
+                bulbSvg.setAttribute("data-label", bulbNumber);
+                bulbSvg.innerHTML = `
+                    <circle class="outline" cx="15" cy="15" r="10"/>
+                    <circle class="glow" cx="15" cy="15" r="12"/>
+                `;
+
+                const bulbLabel = document.createElement("div");
+                bulbLabel.textContent = bulbNumber;
+
+                bulbDiv.appendChild(bulbSvg);
+                bulbDiv.appendChild(bulbLabel);
+
+                switchSvg.addEventListener("click", function () {
+                    const switchLabel = this.getAttribute("data-label");
+                    const bulbToToggle = document.querySelector(`.bulb[data-label="${switchLabel}"]`);
+                    if (bulbToToggle) {
+                        this.classList.toggle("on");
+                        bulbToToggle.classList.toggle("on");
+                    }
+                });
+
+                switchContainer.appendChild(switchDiv);
+                bulbContainer.appendChild(bulbDiv);
+            }
         }
+
+        // Initialize switches and bulbs
+        createSwitchesAndBulbs(slider.value);
+
+        // Update switches and bulbs when slider changes
+        slider.addEventListener("input", function () {
+            sliderValue.textContent = this.value;
+            createSwitchesAndBulbs(parseInt(this.value));
+        });
+
+        // Button controls
+        decreaseBtn.addEventListener("click", function () {
+            if (slider.value > 1) {
+                slider.value--;
+                sliderValue.textContent = slider.value;
+                createSwitchesAndBulbs(parseInt(slider.value));
+            }
+        });
+
+        increaseBtn.addEventListener("click", function () {
+            if (slider.value < 100) {
+                slider.value++;
+                sliderValue.textContent = slider.value;
+                createSwitchesAndBulbs(parseInt(slider.value));
+            }
+        });
 
     </script>
 
 </body>
-
 </html>
