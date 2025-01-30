@@ -49,10 +49,15 @@
             text-align: center;
             width: 40px; /* Adjusted width for better fit */
         }
-        .switch, .bulb {
+        .switch {
             width: 25px;
             cursor: pointer;
         }
+
+        .bulb {
+            width: 25px;
+        }
+
         .switch {
             transform: rotate(180deg);
         }
@@ -68,6 +73,7 @@
         .switch.on .toggle {
             fill: #0f0;
             transform: translateY(5px);
+
         }
         .bulb .outline {
             fill: #444;
@@ -96,11 +102,37 @@
         .hidden {
             display: none;
         }
+        .explanation {
+            font-size: 14px; /* Smaller font for explanation */
+            color: #bbb;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
 
     <h1>Lightswitch Riddle</h1>
+    <p class="explanation">
+        There are 100 lightswitches "upstairs."
+        <br>
+        There are 100 lightbulbs "downstairs."
+        <br>
+        They all need to be labeled correspondingly.
+        <br><br>
+        Each light switch goes to 1 lightbulb.
+        <br><br>
+        You start upstairs, with the switches off.
+        You can flip on/off and label however many switches you want,
+        <br>
+        then check downstairs to see which light(s) turned on, and label those.
+        <br><br>
+        This counts as one trip, from upstairs to downstairs.
+        <br><br>
+        What is the least amount of trips it would take to be able to accurately
+        <br>
+        label every lightswitch to every lightbulb?
+        <br><br>
+    </p>
 
     <div class="controls">
         <button class="button" id="decrease">−</button>
@@ -108,7 +140,8 @@
         <input type="range" id="numSwitches" min="1" max="100" value="100">
         <button class="button" id="increase">+</button>
         <button class="button" id="hideShowNumbers">Hide Numbers</button>
-        <button class="button" id="hideShowBulbs">Hide Bulbs</button> <!-- New Button -->
+        <button class="button" id="hideShowBulbs">Hide Bulbs</button>
+        <button class="button" id="clearNumbers">Clear Numbers</button> <!-- New Button -->
         <button class="button" id="resetSwitches">Reset</button>
     </div>
 
@@ -124,6 +157,7 @@
         const increaseBtn = document.getElementById('increase');
         const hideShowBtn = document.getElementById('hideShowNumbers');
         const hideShowBulbsBtn = document.getElementById('hideShowBulbs'); // Hide/show bulbs button
+        const clearNumbersBtn = document.getElementById('clearNumbers'); // Clear numbers button
         const resetBtn = document.getElementById('resetSwitches');
         let hideNumbers = false;
         let hideBulbs = false; // Track the bulb visibility
@@ -237,6 +271,13 @@
             });
         });
 
+        clearNumbersBtn.addEventListener("click", function () {
+            document.querySelectorAll(".number-input").forEach(input => {
+                input.value = "";
+            });
+            bulbValues = {}; // Clear stored values
+        });
+
         resetBtn.addEventListener("click", function () {
             document.querySelectorAll(".switch").forEach(s => s.classList.remove("on"));
             document.querySelectorAll(".bulb").forEach(b => b.classList.remove("on"));
@@ -248,13 +289,19 @@
         });
 
         decreaseBtn.addEventListener("click", function () {
-            slider.value = Math.max(1, slider.value - 1);
-            slider.dispatchEvent(new Event("input"));
+            if (slider.value > 1) {
+                slider.value--;
+                sliderValue.textContent = slider.value;
+                createSwitchesAndBulbs(parseInt(slider.value));
+            }
         });
 
         increaseBtn.addEventListener("click", function () {
-            slider.value = Math.min(100, slider.value + 1);
-            slider.dispatchEvent(new Event("input"));
+            if (slider.value < 100) {
+                slider.value++;
+                sliderValue.textContent = slider.value;
+                createSwitchesAndBulbs(parseInt(slider.value));
+            }
         });
 
         // Initialize with default value
