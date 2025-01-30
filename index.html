@@ -230,18 +230,16 @@
             createSwitchesAndBulbs(parseInt(this.value));
         });
 
-        // Decrease button logic
         decreaseBtn.addEventListener("click", function () {
-            if (slider.value > slider.min) {
+            if (slider.value > 1) {
                 slider.value--;
                 sliderValue.textContent = slider.value;
                 createSwitchesAndBulbs(parseInt(slider.value));
             }
         });
 
-        // Increase button logic
         increaseBtn.addEventListener("click", function () {
-            if (slider.value < slider.max) {
+            if (slider.value < 100) {
                 slider.value++;
                 sliderValue.textContent = slider.value;
                 createSwitchesAndBulbs(parseInt(slider.value));
