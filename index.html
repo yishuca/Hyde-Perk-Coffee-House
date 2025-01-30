@@ -217,9 +217,10 @@
             hideShowBtn.textContent = hideNumbers ? "Show Numbers" : "Hide Numbers";
 
             document.querySelectorAll(".bulb-container").forEach(bulbDiv => {
-                bulbDiv.querySelector("div").classList.toggle("hidden", hideNumbers);
+                const bulbLabel = bulbDiv.querySelector("div");
                 const input = bulbDiv.querySelector("input");
-                input.classList.toggle("hidden", !hideNumbers);
+                bulbLabel.classList.toggle("hidden", hideNumbers || hideBulbs);
+                input.classList.toggle("hidden", !hideNumbers || hideBulbs);
             });
         });
 
@@ -231,8 +232,8 @@
                 bulbDiv.classList.toggle("hidden", hideBulbs);
                 const bulbLabel = bulbDiv.querySelector("div");
                 const input = bulbDiv.querySelector("input");
-                bulbLabel.classList.toggle("hidden", hideBulbs);
-                input.classList.toggle("hidden", hideBulbs);
+                bulbLabel.classList.toggle("hidden", hideNumbers || hideBulbs);
+                input.classList.toggle("hidden", !hideNumbers || hideBulbs);
             });
         });
 
@@ -247,22 +248,17 @@
         });
 
         decreaseBtn.addEventListener("click", function () {
-            if (slider.value > 1) {
-                slider.value--;
-                sliderValue.textContent = slider.value;
-                createSwitchesAndBulbs(parseInt(slider.value));
-            }
+            slider.value = Math.max(1, slider.value - 1);
+            slider.dispatchEvent(new Event("input"));
         });
 
         increaseBtn.addEventListener("click", function () {
-            if (slider.value < 100) {
-                slider.value++;
-                sliderValue.textContent = slider.value;
-                createSwitchesAndBulbs(parseInt(slider.value));
-            }
+            slider.value = Math.min(100, slider.value + 1);
+            slider.dispatchEvent(new Event("input"));
         });
 
-        createSwitchesAndBulbs(slider.value);
+        // Initialize with default value
+        createSwitchesAndBulbs(100);
     </script>
 
 </body>
