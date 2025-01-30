@@ -10,8 +10,7 @@
             font-family: Arial, sans-serif;
             background-color: #121212;
             color: white;
-            overflow-y: auto; /* Allow vertical scrolling */
-            max-height: 100vh; /* Prevent body from expanding beyond the viewport height */
+            overflow: auto;
         }
         .controls {
             display: flex;
@@ -50,6 +49,9 @@
             max-width: 30px;
             cursor: pointer;
         }
+        .switch {
+            transform: rotate(180deg);
+        }
         .switch .base {
             fill: #333;
             stroke: #666;
@@ -75,8 +77,17 @@
         .bulb.on .glow {
             fill: rgba(255, 255, 0, 0.6);
         }
-        .switch-container svg {
-            transform: rotate(180deg); /* Rotate the switch upside down */
+        .number-input {
+            width: 30px;
+            text-align: center;
+            border: none;
+            background: transparent;
+            color: white;
+            font-size: 12px;
+            outline: none;
+        }
+        .hidden {
+            display: none;
         }
     </style>
 </head>
@@ -89,7 +100,8 @@
         <label for="numSwitches">Number of switches: <span id="sliderValue">100</span></label>
         <input type="range" id="numSwitches" min="1" max="100" value="100">
         <button class="button" id="increase">+</button>
-        <button class="button" id="reset">Reset</button> <!-- Reset button -->
+        <button class="button" id="hideShowNumbers">Hide Numbers</button>
+        <button class="button" id="resetSwitches">Reset Switches</button>
     </div>
 
     <div class="grid-container" id="switches"></div>
@@ -102,7 +114,10 @@
         const sliderValue = document.getElementById('sliderValue');
         const decreaseBtn = document.getElementById('decrease');
         const increaseBtn = document.getElementById('increase');
-        const resetBtn = document.getElementById('reset'); // Reset button reference
+        const hideShowBtn = document.getElementById('hideShowNumbers');
+        const resetBtn = document.getElementById('resetSwitches');
+        let hideNumbers = false;
+        let bulbValues = {}; // Stores user-entered values for bulbs
 
         function shuffleArray(array) {
             for (let i = array.length - 1; i > 0; i--) {
@@ -114,6 +129,7 @@
         function createSwitchesAndBulbs(count) {
             switchContainer.innerHTML = "";
             bulbContainer.innerHTML = "";
+            bulbValues = {}; // Reset saved values when the number of switches changes
 
             let bulbNumbers = Array.from({ length: count }, (_, i) => i + 1);
             shuffleArray(bulbNumbers);
@@ -156,9 +172,21 @@
 
                 const bulbLabel = document.createElement("div");
                 bulbLabel.textContent = bulbNumber;
+                bulbLabel.classList.toggle("hidden", hideNumbers);
+
+                const bulbInput = document.createElement("input");
+                bulbInput.type = "text";
+                bulbInput.classList.add("number-input");
+                bulbInput.classList.toggle("hidden", !hideNumbers);
+                bulbInput.value = bulbValues[bulbNumber] || ""; // Restore saved value
+                bulbInput.addEventListener("input", function () {
+                    this.value = this.value.replace(/\D/g, '').slice(0, 3);
+                    bulbValues[bulbNumber] = this.value;
+                });
 
                 bulbDiv.appendChild(bulbSvg);
                 bulbDiv.appendChild(bulbLabel);
+                bulbDiv.appendChild(bulbInput);
 
                 switchSvg.addEventListener("click", function () {
                     const switchLabel = this.getAttribute("data-label");
@@ -174,16 +202,27 @@
             }
         }
 
-        // Initialize switches and bulbs
-        createSwitchesAndBulbs(slider.value);
+        hideShowBtn.addEventListener("click", function () {
+            hideNumbers = !hideNumbers;
+            hideShowBtn.textContent = hideNumbers ? "Show Numbers" : "Hide Numbers";
 
-        // Update switches and bulbs when slider changes
+            document.querySelectorAll(".bulb-container").forEach(bulbDiv => {
+                bulbDiv.querySelector("div").classList.toggle("hidden", hideNumbers);
+                const input = bulbDiv.querySelector("input");
+                input.classList.toggle("hidden", !hideNumbers);
+            });
+        });
+
+        resetBtn.addEventListener("click", function () {
+            document.querySelectorAll(".switch").forEach(s => s.classList.remove("on"));
+            document.querySelectorAll(".bulb").forEach(b => b.classList.remove("on"));
+        });
+
         slider.addEventListener("input", function () {
             sliderValue.textContent = this.value;
             createSwitchesAndBulbs(parseInt(this.value));
         });
 
-        // Button controls
         decreaseBtn.addEventListener("click", function () {
             if (slider.value > 1) {
                 slider.value--;
@@ -200,15 +239,7 @@
             }
         });
 
-        // Reset button functionality
-        resetBtn.addEventListener("click", function () {
-            // Reset all switches and bulbs to off state
-            const allSwitches = document.querySelectorAll('.switch');
-            const allBulbs = document.querySelectorAll('.bulb');
-            allSwitches.forEach(switchSvg => switchSvg.classList.remove('on'));
-            allBulbs.forEach(bulbSvg => bulbSvg.classList.remove('on'));
-        });
-
+        createSwitchesAndBulbs(slider.value);
     </script>
 
 </body>
