@@ -230,6 +230,24 @@
             createSwitchesAndBulbs(parseInt(this.value));
         });
 
+        // Decrease button logic
+        decreaseBtn.addEventListener("click", function () {
+            if (slider.value > slider.min) {
+                slider.value--;
+                sliderValue.textContent = slider.value;
+                createSwitchesAndBulbs(parseInt(slider.value));
+            }
+        });
+
+        // Increase button logic
+        increaseBtn.addEventListener("click", function () {
+            if (slider.value < slider.max) {
+                slider.value++;
+                sliderValue.textContent = slider.value;
+                createSwitchesAndBulbs(parseInt(slider.value));
+            }
+        });
+
         createSwitchesAndBulbs(slider.value);
     </script>
 
