@@ -10,15 +10,23 @@
             font-family: Arial, sans-serif;
             background-color: #121212;
             color: white;
+            margin: 0;
+            padding-top: 60px; /* Space for sticky navbar */
             overflow: auto;
         }
+        /* Sticky navbar styles */
         .controls {
+            position: sticky;
+            top: 0;
+            background-color: #121212;
+            padding: 10px 0;
+            z-index: 1000;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 5px;
-            margin-bottom: 5px;
+            gap: 10px;
             flex-wrap: wrap;
+            border-bottom: 2px solid #333;
         }
         .button {
             padding: 4px 8px;
@@ -73,7 +81,6 @@
         .switch.on .toggle {
             fill: #0f0;
             transform: translateY(5px);
-
         }
         .bulb .outline {
             fill: #444;
@@ -134,6 +141,7 @@
         <br><br>
     </p>
 
+    <!-- Sticky Navbar with Control Buttons -->
     <div class="controls">
         <button class="button" id="decrease">−</button>
         <label for="numSwitches">Switches: <span id="sliderValue">100</span></label>
@@ -156,12 +164,12 @@
         const decreaseBtn = document.getElementById('decrease');
         const increaseBtn = document.getElementById('increase');
         const hideShowBtn = document.getElementById('hideShowNumbers');
-        const hideShowBulbsBtn = document.getElementById('hideShowBulbs'); // Hide/show bulbs button
-        const clearNumbersBtn = document.getElementById('clearNumbers'); // Clear numbers button
+        const hideShowBulbsBtn = document.getElementById('hideShowBulbs');
+        const clearNumbersBtn = document.getElementById('clearNumbers');
         const resetBtn = document.getElementById('resetSwitches');
         let hideNumbers = false;
-        let hideBulbs = false; // Track the bulb visibility
-        let bulbValues = {}; // Stores user-entered values for bulbs
+        let hideBulbs = false;
+        let bulbValues = {};
 
         function shuffleArray(array) {
             for (let i = array.length - 1; i > 0; i--) {
@@ -173,7 +181,7 @@
         function createSwitchesAndBulbs(count) {
             switchContainer.innerHTML = "";
             bulbContainer.innerHTML = "";
-            bulbValues = {}; // Reset saved values when the number of switches changes
+            bulbValues = {};
 
             let bulbNumbers = Array.from({ length: count }, (_, i) => i + 1);
             shuffleArray(bulbNumbers);
@@ -190,10 +198,9 @@
                 switchSvg.setAttribute("viewBox", "0 0 30 50");
                 switchSvg.classList.add("switch");
                 switchSvg.setAttribute("data-label", switchNumber);
-                switchSvg.innerHTML = `
-                    <rect class="base" x="5" y="5" width="20" height="40" rx="5"/>
-                    <circle class="toggle" cx="15" cy="20" r="7"/>
-                `;
+                switchSvg.innerHTML = 
+                    `<rect class="base" x="5" y="5" width="20" height="40" rx="5"/>
+                    <circle class="toggle" cx="15" cy="20" r="7"/>`;
 
                 const switchLabel = document.createElement("div");
                 switchLabel.textContent = switchNumber;
@@ -209,10 +216,9 @@
                 bulbSvg.setAttribute("viewBox", "0 0 30 30");
                 bulbSvg.classList.add("bulb");
                 bulbSvg.setAttribute("data-label", bulbNumber);
-                bulbSvg.innerHTML = `
-                    <circle class="outline" cx="15" cy="15" r="10"/>
-                    <circle class="glow" cx="15" cy="15" r="12"/>
-                `;
+                bulbSvg.innerHTML = 
+                    `<circle class="outline" cx="15" cy="15" r="10"/>
+                    <circle class="glow" cx="15" cy="15" r="12"/>`;
 
                 const bulbLabel = document.createElement("div");
                 bulbLabel.textContent = bulbNumber;
@@ -222,7 +228,7 @@
                 bulbInput.type = "text";
                 bulbInput.classList.add("number-input");
                 bulbInput.classList.toggle("hidden", !hideNumbers || hideBulbs);
-                bulbInput.value = bulbValues[bulbNumber] || ""; // Restore saved value
+                bulbInput.value = bulbValues[bulbNumber] || "";
                 bulbInput.addEventListener("input", function () {
                     this.value = this.value.replace(/\D/g, '').slice(0, 3);
                     bulbValues[bulbNumber] = this.value;
@@ -275,7 +281,7 @@
             document.querySelectorAll(".number-input").forEach(input => {
                 input.value = "";
             });
-            bulbValues = {}; // Clear stored values
+            bulbValues = {};
         });
 
         resetBtn.addEventListener("click", function () {
