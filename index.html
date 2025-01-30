@@ -108,6 +108,7 @@
         <input type="range" id="numSwitches" min="1" max="100" value="100">
         <button class="button" id="increase">+</button>
         <button class="button" id="hideShowNumbers">Hide Numbers</button>
+        <button class="button" id="hideShowBulbs">Hide Bulbs</button> <!-- New Button -->
         <button class="button" id="resetSwitches">Reset</button>
     </div>
 
@@ -122,8 +123,10 @@
         const decreaseBtn = document.getElementById('decrease');
         const increaseBtn = document.getElementById('increase');
         const hideShowBtn = document.getElementById('hideShowNumbers');
+        const hideShowBulbsBtn = document.getElementById('hideShowBulbs'); // Hide/show bulbs button
         const resetBtn = document.getElementById('resetSwitches');
         let hideNumbers = false;
+        let hideBulbs = false; // Track the bulb visibility
         let bulbValues = {}; // Stores user-entered values for bulbs
 
         function shuffleArray(array) {
@@ -179,12 +182,12 @@
 
                 const bulbLabel = document.createElement("div");
                 bulbLabel.textContent = bulbNumber;
-                bulbLabel.classList.toggle("hidden", hideNumbers);
+                bulbLabel.classList.toggle("hidden", hideNumbers || hideBulbs);
 
                 const bulbInput = document.createElement("input");
                 bulbInput.type = "text";
                 bulbInput.classList.add("number-input");
-                bulbInput.classList.toggle("hidden", !hideNumbers);
+                bulbInput.classList.toggle("hidden", !hideNumbers || hideBulbs);
                 bulbInput.value = bulbValues[bulbNumber] || ""; // Restore saved value
                 bulbInput.addEventListener("input", function () {
                     this.value = this.value.replace(/\D/g, '').slice(0, 3);
@@ -217,6 +220,19 @@
                 bulbDiv.querySelector("div").classList.toggle("hidden", hideNumbers);
                 const input = bulbDiv.querySelector("input");
                 input.classList.toggle("hidden", !hideNumbers);
+            });
+        });
+
+        hideShowBulbsBtn.addEventListener("click", function () {
+            hideBulbs = !hideBulbs;
+            hideShowBulbsBtn.textContent = hideBulbs ? "Show Bulbs" : "Hide Bulbs";
+
+            document.querySelectorAll(".bulb-container").forEach(bulbDiv => {
+                bulbDiv.classList.toggle("hidden", hideBulbs);
+                const bulbLabel = bulbDiv.querySelector("div");
+                const input = bulbDiv.querySelector("input");
+                bulbLabel.classList.toggle("hidden", hideBulbs);
+                input.classList.toggle("hidden", hideBulbs);
             });
         });
 
