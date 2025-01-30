@@ -11,7 +11,7 @@
             background-color: #121212;
             color: white;
             margin: 0;
-            padding-top: 30px; /* Space for sticky navbar */
+            padding-top: 30px;
             overflow: auto;
         }
 
@@ -25,9 +25,7 @@
             position: sticky;
             top: 0;
             background-color: #121212;
-            padding: 10px 0; /* Vertical padding (top and bottom) */
-            padding-left: 10px; /* Added 10px padding on the left */
-            padding-right: 10px; /* Added 10px padding on the right */
+            padding: 10px 0;
             z-index: 1000;
             display: flex;
             align-items: center;
@@ -64,7 +62,7 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            width: 40px; /* Adjusted width for better fit */
+            width: 40px;
         }
         .switch {
             width: 25px;
@@ -104,7 +102,7 @@
             fill: rgba(255, 255, 0, 0.6);
         }
         .number-input {
-            width: 40px; /* Default small size */
+            width: 40px;
             min-width: 40px;
             max-width: 100px;
             text-align: center;
@@ -120,25 +118,21 @@
         }
 
         .number-input:focus {
-            width: 100px; /* Expand width on focus */
-            font-size: 14px; /* Increase font size for better readability */
-            background-color: black; /* Optional: Change background color for contrast */
+            width: 100px;
+            font-size: 14px;
+            background-color: black;
             z-index: 3;
         }
 
         .hidden {
             display: none;
         }
-        .explanation {
-            font-size: 14px; /* Smaller font for explanation */
-            color: #bbb;
-            margin-top: 10px;
-        }
+
         footer {
             background-color: #121212;
             color: white;
             text-align: center;
-            position: relative; /* Changed from 'fixed' to 'relative' */
+            position: relative;
             width: 100%;
             font-size: 14px;
             border-top: 2px solid #333;
@@ -179,7 +173,7 @@
         <button class="button" id="increase">+</button>
         <button class="button" id="hideShowNumbers">Show Numbers</button>
         <button class="button" id="hideShowBulbs">Hide Bulbs</button>
-        <button class="button" id="clearNumbers">Clear Numbers</button> <!-- New Button -->
+        <button class="button" id="clearNumbers">Clear Numbers</button>
         <button class="button" id="resetSwitches">Reset</button>
     </div>
 
@@ -240,13 +234,24 @@
                 const switchLabel = document.createElement("div");
                 switchLabel.textContent = switchNumber;
 
+                const switchInput = document.createElement("input");
+                switchInput.type = "tel"; // Change from "text" to "tel"
+                switchInput.classList.add("number-input");
+                switchInput.classList.toggle("hidden", !hideNumbers);
+                switchInput.value = bulbValues[switchNumber] || "";
+                switchInput.addEventListener("input", function () {
+                    this.value = this.value.replace(/\D/g, ''); // Allow only numeric input
+                    bulbValues[switchNumber] = this.value;
+                });
+
                 switchDiv.appendChild(switchSvg);
                 switchDiv.appendChild(switchLabel);
+                switchDiv.appendChild(switchInput);
 
                 // Create bulb
                 const bulbDiv = document.createElement("div");
                 bulbDiv.classList.add("bulb-container");
-                if (hideBulbs) bulbDiv.classList.add("hidden"); // Start hidden
+                if (hideBulbs) bulbDiv.classList.add("hidden");
 
                 const bulbSvg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
                 bulbSvg.setAttribute("viewBox", "0 0 30 30");
@@ -266,11 +271,9 @@
                 bulbInput.classList.toggle("hidden", !hideNumbers || hideBulbs);
                 bulbInput.value = bulbValues[bulbNumber] || "";
                 bulbInput.addEventListener("input", function () {
-                    this.value = this.value.replace(/\D/g, ''); // Allow only numeric input with no digit limit
+                    this.value = this.value.replace(/\D/g, ''); // Allow only numeric input
                     bulbValues[bulbNumber] = this.value;
                 });
-
-
 
                 bulbDiv.appendChild(bulbSvg);
                 bulbDiv.appendChild(bulbLabel);
@@ -293,6 +296,13 @@
         hideShowBtn.addEventListener("click", function () {
             hideNumbers = !hideNumbers;
             hideShowBtn.textContent = hideNumbers ? "Show Numbers" : "Hide Numbers";
+
+            document.querySelectorAll(".switch-container").forEach(switchDiv => {
+                const switchLabel = switchDiv.querySelector("div");
+                const input = switchDiv.querySelector("input");
+                switchLabel.classList.toggle("hidden", hideNumbers);
+                input.classList.toggle("hidden", !hideNumbers);
+            });
 
             document.querySelectorAll(".bulb-container").forEach(bulbDiv => {
                 const bulbLabel = bulbDiv.querySelector("div");
@@ -348,7 +358,6 @@
             }
         });
 
-        // Initialize with default value
         createSwitchesAndBulbs(100);
         hideShowBulbsBtn.textContent = "Show Bulbs";
     </script>
