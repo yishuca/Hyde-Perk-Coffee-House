@@ -249,14 +249,15 @@
                 bulbLabel.classList.toggle("hidden", hideNumbers || hideBulbs);
 
                 const bulbInput = document.createElement("input");
-                bulbInput.type = "text";
-                bulbInput.classList.add("number-input");
-                bulbInput.classList.toggle("hidden", !hideNumbers || hideBulbs);
-                bulbInput.value = bulbValues[bulbNumber] || "";
-                bulbInput.addEventListener("input", function () {
-                    this.value = this.value.replace(/\D/g, '').slice(0, 3);
-                    bulbValues[bulbNumber] = this.value;
-                });
+bulbInput.type = "tel"; // Change from "text" to "tel"
+bulbInput.classList.add("number-input");
+bulbInput.classList.toggle("hidden", !hideNumbers || hideBulbs);
+bulbInput.value = bulbValues[bulbNumber] || "";
+bulbInput.addEventListener("input", function () {
+    this.value = this.value.replace(/\D/g, '').slice(0, 3); // Allow only numeric input
+    bulbValues[bulbNumber] = this.value;
+});
+
 
                 bulbDiv.appendChild(bulbSvg);
                 bulbDiv.appendChild(bulbLabel);
